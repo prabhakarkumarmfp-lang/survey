@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>परिवार सर्वे - सदस्य विवरण</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:"Noto Sans Devanagari","Mangal",Arial,sans-serif;background:#eef2f7;color:#1f2937}
+header{background:linear-gradient(135deg,#173f73,#2866a8);color:#fff;padding:14px 22px;font-size:24px;font-weight:700;box-shadow:0 2px 8px #0002}
+.wrap{max-width:1500px;margin:16px auto;padding:0 12px}
+.grid{display:grid;grid-template-columns:1fr 250px;gap:14px}.card{background:#fff;border-radius:10px;box-shadow:0 2px 10px #0002;border:1px solid #d9e0e8}
+.title{font-size:25px;text-align:center;color:#163e72;font-weight:800;padding:12px;border-bottom:1px solid #e5e7eb}
+.form{padding:15px}.section{border:1px solid #b9c6d6;border-radius:8px;padding:13px;margin-bottom:12px;position:relative}.legend{position:absolute;top:-12px;left:14px;background:#fff;padding:0 8px;color:#08733c;font-weight:800}
+.fields{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}.field label{display:block;font-weight:700;font-size:14px;margin-bottom:4px}.field input,.field select{width:100%;height:37px;border:1px solid #aeb9c7;border-radius:5px;padding:6px 9px;font-size:15px;background:#fff}.field input:focus,.field select:focus{outline:2px solid #77a9dc}
+.actions{display:flex;gap:9px;flex-wrap:wrap}.btn{border:1px solid #aeb8c5;background:#fff;border-radius:6px;padding:9px 16px;font-weight:800;cursor:pointer;min-width:105px}.btn:hover{filter:brightness(.96)}.save{background:#e8f1ff}.next{background:#effbe9}.search{background:#fff5df}.edit{background:#f3edff}.del{background:#fff0f0}.clear{background:#edf7ff}.close{background:#fff}.side{padding:14px}.side h3{margin:0 0 12px;color:#0b6d39}.side .info{padding:11px;border:1px solid #d7dee7;border-radius:7px;margin-bottom:9px;background:#fafbfc}.side b{display:block;margin-bottom:3px}.status{margin-top:10px;padding:9px;border-radius:6px;background:#eef7ef;color:#176b32;min-height:38px}
+.tablecard{margin-top:14px;padding:12px}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}.toolbar input{height:37px;padding:6px 10px;border:1px solid #adb8c5;border-radius:5px;flex:1;min-width:240px}.tablewrap{overflow:auto;max-height:390px;border:1px solid #d8dee6}table{border-collapse:collapse;width:100%;font-size:13px;min-width:1500px}th,td{border:1px solid #d8dee6;padding:7px;white-space:nowrap}th{background:#edf3f9;position:sticky;top:0;z-index:1}.rowbtn{padding:4px 8px;border:1px solid #aaa;border-radius:4px;background:#fff;cursor:pointer}.report{display:none;margin-top:14px;padding:14px}.report h2{text-align:center;margin:0 0 8px}.reportmeta{text-align:center;margin-bottom:10px;font-weight:700}.reportwrap{overflow:auto;border:1px solid #ccc}.report table{min-width:1800px;font-size:11px}.report th,.report td{padding:5px}.report-actions{display:flex;gap:8px;justify-content:center;margin:10px 0}@media print{body{background:#fff}.wrap>header,.grid,.tablecard,.no-print{display:none!important}.report{display:block!important;box-shadow:none;border:0;margin:0;padding:0}.reportwrap{overflow:visible;border:0}.report table{width:100%;min-width:0;font-size:8px;table-layout:auto}.report th,.report td{white-space:normal;word-break:break-word;padding:3px}.report-actions{display:none!important}@page{size:A4 landscape;margin:8mm}}
+@media(max-width:1050px){.grid{grid-template-columns:1fr}.fields{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.fields{grid-template-columns:1fr}.title{font-size:20px}}
+</style>
+</head>
+<body>
+<header>परिवार सर्वेक्षण सॉफ्टवेयर</header>
+<div class="wrap">
+<div class="grid">
+<div class="card">
+<div class="title">परिवार सर्वे – सदस्य विवरण फॉर्म</div>
+<div class="form">
+<div class="section"><div class="legend">परिवार / मकान विवरण</div><div class="fields">
+<div class="field"><label>मकान संख्या *</label><input id="house" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="10" autocomplete="off"></div>
+<div class="field"><label>सदस्य क्रमांक *</label><input id="member" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="5" autocomplete="off"></div>
+<div class="field"><label>परिवार के सदस्यों का नाम *</label><input id="head"></div>
+<div class="field"><label>परिवार में भूमिका</label><select id="role"><option value="">-- चयन करें --</option><option>मुखिया</option><option>सदस्य</option></select></div>
+</div></div>
+<div class="section"><div class="legend">सदस्य व्यक्तिगत विवरण</div><div class="fields">
+<div class="field"><label>संबंध</label><select id="relation"><option value="">-- चयन करें --</option><option>पिता</option><option>माता</option><option>पति</option><option>पत्नी</option><option>पुत्र</option><option>पुत्री</option><option>पोता</option><option>पोती</option><option>अन्य</option></select></div>
+<div class="field"><label>पिता / पति का नाम</label><input id="father"></div>
+<div class="field"><label>लिंग</label><select id="gender"><option></option><option>पुरुष</option><option>महिला</option><option>अन्य</option></select></div>
+<div class="field"><label>जन्म तिथि</label><input id="dob" type="date"></div>
+<div class="field"><label>वर्तमान उम्र (वर्ष में)</label><input id="age" readonly></div>
+</div></div>
+<div class="section"><div class="legend">संपर्क एवं पहचान विवरण</div><div class="fields">
+<div class="field"><label>मोबाइल नंबर</label><input id="mobile" inputmode="numeric" pattern="[0-9]*" maxlength="10" inputmode="numeric"></div>
+<div class="field"><label>आधार कार्ड नम्बर</label><input id="aadhaar" inputmode="numeric" pattern="[0-9]*" maxlength="12" inputmode="numeric"></div>
+<div class="field"><label>ग्राम पंचायत नाम</label><select id="panchayat"><option value="">-- चयन करें --</option><option>उतरी ढेकहाँ</option><option>पश्चिमी ढेकहाँ</option></select></div>
+<div class="field"><label>गाँव का नाम</label><select id="village"><option value="">-- चयन करें --</option><option>ढेकहाँ</option></select></div>
+<div class="field"><label>टोला का नाम</label><input id="tola"></div>
+<div class="field"><label>वार्ड नम्बर</label><select id="ward"><option value="">-- चयन करें --</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option></select></div>
+<div class="field"><label>अन्य</label><input id="other"></div>
+</div></div>
+<div class="actions">
+<button class="btn save" onclick="saveData()">💾 SAVE (सेव)</button>
+<button class="btn next" onclick="nextMember()">➡ अगला सदस्य</button>
+<button class="btn search" onclick="searchData()">🔎 SEARCH (खोजें)</button>
+<button class="btn edit" onclick="editData()">✎ EDIT (संपादन)</button>
+<button class="btn del" onclick="deleteData()">🗑 DELETE (हटाएँ)</button>
+<button class="btn clear" onclick="clearForm()">↻ CLEAR (साफ करें)</button>
+<button class="btn close" onclick="window.close()">✕ CLOSE</button>
+<div id="status" class="status">डेटा आपके इसी कंप्यूटर के ब्राउज़र में सुरक्षित रहेगा।</div>
+</div>
+</div></div>
+<div class="card side"><h3>बटन विवरण</h3>
+<div class="info"><b>💾 SAVE</b>नया सदस्य Excel-जैसे डेटा टेबल में सेव करें।</div>
+<div class="info"><b>➡ अगला सदस्य</b>उसी मकान के अगले सदस्य की एंट्री शुरू करें।</div>
+<div class="info"><b>🔎 SEARCH</b>मकान संख्या + सदस्य क्रमांक से रिकॉर्ड खोजें। सदस्य क्रमांक खाली रखें तो उस मकान के सभी सदस्यों की पूरी जानकारी दिखेगी।</div><div class="info"><b>🖨 A4 PRINT</b>सभी सदस्यों की जानकारी A4 Landscape में प्रिंट करें।</div>
+<div class="info"><b>✎ EDIT</b>मौजूदा रिकॉर्ड में सुधार करें।</div>
+<div class="info"><b>🗑 DELETE</b>रिकॉर्ड हटाएँ।</div>
+<div class="info"><b>📤 CSV निर्यात</b>डेटा को Excel में खोलने योग्य CSV में निकालें।</div>
+<div class="info"><b>🔒 स्थानीय डेटा</b>डेटा ब्राउज़र के Local Storage में रखा जाता है।</div>
+</div></div>
+
+<div id="report" class="card report">
+<h2>परिवार सर्वेक्षण — मकान संख्या <span id="reportHouse"></span></h2>
+<div class="reportmeta">कुल सदस्य: <span id="reportCount"></span> &nbsp; | &nbsp; सदस्य क्रमांक खाली रखकर SEARCH करने पर इस मकान के सभी सदस्य यहाँ दिखाई देते हैं।</div>
+<div class="report-actions no-print"><button class="btn" onclick="printHouseReport()">🖨 A4 PRINT</button><button class="btn" onclick="$('report').style.display='none'">✕ बंद करें</button></div>
+<div class="reportwrap"><table><thead><tr><th>सदस्य क्र.</th><th>नाम</th><th>भूमिका</th><th>संबंध</th><th>पिता / पति का नाम</th><th>लिंग</th><th>जन्म तिथि</th><th>उम्र</th><th>मोबाइल</th><th>आधार</th><th>ग्राम पंचायत</th><th>गाँव</th><th>टोला</th><th>वार्ड</th><th>अन्य</th></tr></thead><tbody id="reportBody"></tbody></table></div>
+</div>
+
+<div class="card tablecard">
+<h2 style="margin:4px 0 10px;color:#163e72">परिवार डेटा</h2>
+<div class="toolbar">
+<input id="filter" placeholder="नाम / मकान / गाँव / मोबाइल / आधार से खोजें..." oninput="render()">
+<button class="btn" onclick="exportCSV()">📥 Excel/CSV Export</button>
+<button class="btn" onclick="clearAll()">⚠ सभी डेटा हटाएँ</button>
+</div>
+<div class="tablewrap"><table><thead><tr>
+<th>मकान संख्या</th><th>सदस्य क्रमांक</th><th>परिवार के सदस्यों का नाम</th><th>परिवार में भूमिका</th><th>संबंध</th><th>पिता / पति का नाम</th><th>लिंग</th><th>जन्म तिथि</th><th>उम्र</th><th>मोबाइल</th><th>आधार</th><th>ग्राम पंचायत</th><th>गाँव</th><th>टोला</th><th>वार्ड</th><th>अन्य</th><th>Action</th>
+</tr></thead><tbody id="tbody"></tbody></table></div>
+</div>
+</div>
+<script>
+const ids=["house","member","head","role","relation","father","gender","dob","age","mobile","aadhaar","panchayat","village","tola","ward","other"];
+let data=JSON.parse(localStorage.getItem("parivarSurveyData")||"[]"), editIndex=-1;
+const $=id=>document.getElementById(id);
+["house","member","mobile","aadhaar"].forEach(id=>$(id).addEventListener("input",function(){this.value=this.value.replace(/\D/g,"");}));
+$("dob").addEventListener("change",calcAge);
+function calcAge(){if(!$("dob").value){$("age").value="";return}let d=new Date($("dob").value),t=new Date();let a=t.getFullYear()-d.getFullYear();if(t.getMonth()<d.getMonth()||(t.getMonth()==d.getMonth()&&t.getDate()<d.getDate()))a--;$("age").value=a>=0?a:"";}
+function obj(){let o={};ids.forEach(id=>o[id]=$(id).value);o.age=$("age").value;return o}
+function fill(o){ids.forEach(id=>$(id).value=o[id]??"");calcAge()}
+function save(){localStorage.setItem("parivarSurveyData",JSON.stringify(data));render()}
+function saveData(){let o=obj();if(!/^\d+$/.test(o.house)||!/^\d+$/.test(o.member)||!o.head){msg("मकान संख्या और सदस्य क्रमांक में केवल अंक दर्ज करें तथा सदस्य का नाम भरें।",true);return}
+if(o.mobile && !/^\d{10}$/.test(o.mobile)){msg("मोबाइल नंबर 10 अंकों का होना चाहिए।",true);return}
+if(o.aadhaar && !/^\d{12}$/.test(o.aadhaar)){msg("आधार नंबर 12 अंकों का होना चाहिए।",true);return}
+if(data.some((x,i)=>i!==editIndex&&String(x.house)==String(o.house)&&String(x.member)==String(o.member))){msg("यह मकान संख्या + सदस्य क्रमांक पहले से मौजूद है। Search/Edit करें।",true);return}
+if(editIndex>=0){data[editIndex]=o;editIndex=-1;msg("रिकॉर्ड अपडेट हो गया।")}else{data.push(o);msg("सदस्य का डेटा सेव हो गया।")}save();clearForm(false)}
+function searchData(){let h=$("house").value.trim(),m=$("member").value.trim();if(!h){msg("मकान संख्या डालें। सदस्य क्रमांक खाली रखने पर उस मकान के सभी सदस्य दिखेंगे।",true);return}if(!m){showHouseReport(h);return}let i=data.findIndex(x=>String(x.house)==h&&String(x.member)==m);if(i<0){msg("रिकॉर्ड नहीं मिला।",true);return}editIndex=i;fill(data[i]);msg("रिकॉर्ड मिल गया। अब Edit या Delete कर सकते हैं।")}
+function showHouseReport(h){let rows=data.filter(x=>String(x.house)==String(h)).sort((a,b)=>(parseInt(a.member)||0)-(parseInt(b.member)||0));if(!rows.length){$("report").style.display="none";msg("इस मकान संख्या का कोई रिकॉर्ड नहीं मिला।",true);return}let cols=["member","head","role","relation","father","gender","dob","age","mobile","aadhaar","panchayat","village","tola","ward","other"];let heads=["सदस्य क्र.","नाम","भूमिका","संबंध","पिता / पति का नाम","लिंग","जन्म तिथि","उम्र","मोबाइल","आधार","ग्राम पंचायत","गाँव","टोला","वार्ड","अन्य"];$("reportHouse").textContent=h;$("reportCount").textContent=rows.length;$("reportBody").innerHTML=rows.map(x=>"<tr>"+cols.map(c=>"<td>"+esc(x[c]??"")+"</td>").join("")+"</tr>").join("");$("report").style.display="block";$("report").scrollIntoView({behavior:"smooth",block:"start"});msg("मकान संख्या "+h+" के "+rows.length+" सदस्यों की पूरी जानकारी दिखाई गई है। Print से A4 प्रिंट निकालें।")}
+function printHouseReport(){if($("report").style.display!=="block"){msg("पहले मकान संख्या डालकर SEARCH करें और सदस्य क्रमांक खाली रखें।",true);return}window.print()}
+function editData(){if(editIndex<0){searchData();if(editIndex<0)return}let o=obj();if(!o.house||!o.member||!o.head){msg("आवश्यक जानकारी भरें।",true);return}data[editIndex]=o;save();editIndex=-1;msg("रिकॉर्ड सफलतापूर्वक अपडेट हो गया।");clearForm(false)}
+function deleteData(){if(editIndex<0){searchData();if(editIndex<0)return}if(confirm("क्या आप यह रिकॉर्ड हटाना चाहते हैं?")){data.splice(editIndex,1);save();editIndex=-1;clearForm(false);msg("रिकॉर्ड हट गया।")}}
+function nextMember(){let h=$("house").value.trim(),n=parseInt($("member").value||"0")+1;if(!h){msg("पहले मकान संख्या भरें।",true);return}clearForm(false);$("house").value=h;$("member").value=n;$("member").focus();msg("अगले सदस्य की एंट्री के लिए फॉर्म तैयार है।")}
+function clearForm(show=true){ids.forEach(id=>$(id).value="");editIndex=-1;if(show)msg("फॉर्म साफ कर दिया गया।")}
+function msg(t,err=false){$("status").textContent=t;$("status").style.background=err?"#fff0f0":"#eef7ef";$("status").style.color=err?"#a11":"#176b32"}
+function render(){let q=$("filter").value.toLowerCase(), rows=data.map((x,i)=>({x,i})).filter(z=>JSON.stringify(z.x).toLowerCase().includes(q));$("tbody").innerHTML=rows.map(z=>{let x=z.x;return `<tr>${ids.map(id=>`<td>${esc(x[id]??"")}</td>`).join("")}<td><button class="rowbtn" onclick="loadIndex(${z.i})">Open</button></td></tr>`}).join("")}
+function loadIndex(i){editIndex=i;fill(data[i]);window.scrollTo({top:0,behavior:"smooth"});msg("रिकॉर्ड फॉर्म में लोड हो गया।")}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function clearAll(){if(confirm("सभी परिवार डेटा हटाना है? यह कार्रवाई वापस नहीं होगी।")){data=[];save();clearForm(false);msg("सभी डेटा हटा दिया गया।")}}
+function exportCSV(){if(!data.length){msg("Export करने के लिए डेटा नहीं है।",true);return}let headers=["मकान संख्या","सदस्य क्रमांक","परिवार के सदस्यों का नाम","परिवार में भूमिका","संबंध","पिता / पति का नाम","लिंग","जन्म तिथि","वर्तमान उम्र","मोबाइल नंबर","आधार कार्ड नम्बर","ग्राम पंचायत नाम","गाँव का नाम","टोला का नाम","वार्ड नम्बर","अन्य"];let csv="\uFEFF"+headers.join(",")+"\n"+data.map(x=>ids.map(id=>`"${String(x[id]??"").replace(/"/g,'""')}"`).join(",")).join("\n");let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));a.download="Parivar_Survey_Data.csv";a.click();URL.revokeObjectURL(a.href)}
+render();
+</script>
+
+<script>
+['houseNo','memberNo','mobile','aadhaar'].forEach(id=>{const e=document.getElementById(id); if(e){e.addEventListener('input',()=>e.value=e.value.replace(/\D/g,''));}});
+</script>
+</body></html>
